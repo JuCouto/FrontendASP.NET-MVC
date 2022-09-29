@@ -1,0 +1,55 @@
+﻿
+@model IEnumerable<MVC.Models.Contato>//IEnumerable-carregar a página retornando a lista de contatos criada no controller
+
+    @{
+        ViewData["Title"] = "Listagem de Contatos"; //nome que aparece na aba do navegador
+    }
+
+    <h2>Contatos</h2>
+    
+    <p>
+        <a asp-action="Criar">Novo Contato</a> @*//redirecionamento para página de novo contato*@
+    </p>
+    
+    <table class="table">@*montando cabeçalho com os nomes da coluna da tabela*@
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                 </th>
+                 <th>
+                    @Html.DisplayNameFor(model => model.Telefone)
+                 </th>
+                 <th>
+                    @Html.DisplayNameFor(model => model.Ativo)
+                 </th>
+            </tr>
+        </thead>
+        <tbody>      @*montando o corpo da tabela*@
+            @foreach  (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.Id )
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Nome )
+                    </td>
+                        <td>
+                        @Html.DisplayFor(model => item.Telefone )
+                    </td>
+                     <td>
+                        @Html.DisplayFor(model => item.Ativo)
+                    </td>
+                    <td>
+                        <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |  <!--colocar o arroba para passar o id de forma dinâmica-->
+                        <a asp-action="Detalhes" asp-route-id="@item.Id">Detalhes</a> |
+                        <a asp-action="Deletar" asp-route-id="@item.Id">Deletar</a> 
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
